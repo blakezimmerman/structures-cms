@@ -1,14 +1,18 @@
-import * as http from 'http';
 import * as express from 'express';
 import * as path from 'path';
+import * as bodyParser from 'body-parser';
+import ApiRoutes from './routes';
 import webpackBuild from './webpackBuild';
 
 const app = express();
-const server = http.createServer(app);
 const ENV = process.env.NODE_ENV || 'development';
-const url = 'http://localhost:3000'
+const url = 'http://localhost:3000';
 const port = 3000;
 const dist = path.resolve(__dirname, '../../dist/');
+
+app.use(bodyParser.json());
+
+ApiRoutes(app);
 
 if (ENV === 'development') {
   webpackBuild(app);
@@ -19,6 +23,6 @@ if (ENV === 'development') {
   );
 }
 
-server.listen(port, () =>
+app.listen(port, () =>
   console.log('Listening on' + url)
 );
