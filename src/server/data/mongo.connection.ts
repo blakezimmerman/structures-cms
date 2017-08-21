@@ -5,7 +5,7 @@ type MongoConnection = undefined | Promise<mongodb.Db>;
 
 const settings = {
   mongoConfig: {
-    serverUrl: "mongo://localhost:27017/",
+    serverUrl: "mongodb://localhost:27017/",
     database : "structures-cms"
   }
 };
@@ -20,7 +20,6 @@ const connectDb = () => {
           return db;
       });
   }
-
   return _connection;
 };
 

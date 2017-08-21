@@ -1,8 +1,8 @@
 import { Field } from './field.model';
 
 export interface Structure {
+  _id: string;
   name: string;
-  slug: string;
   description: string;
   fields: Field[];
 }

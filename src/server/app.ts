@@ -24,5 +24,5 @@ if (ENV === 'development') {
 }
 
 app.listen(port, () =>
-  console.log('Listening on' + url)
+  console.log('Listening on ' + url)
 );

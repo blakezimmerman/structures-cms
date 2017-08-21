@@ -3,9 +3,9 @@ import { EntryField } from './field.model';
 import { Comment } from './comment.model';
 
 export interface Entry {
-  title: string;
+  _id: string;
   type: string;
-  slug: string;
+  title: string;
   blurb: string;
   author: User;
   dateCreated: Date;

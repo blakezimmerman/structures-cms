@@ -5,9 +5,13 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
+    "lib": ["es2015", "dom"],
     "module": "commonjs",
     "target": "es5",
     "allowJs": true,
-    "jsx": "react"
-  }
+    "jsx": "react",
+    "baseUrl": "./src"
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["./node_modules"]
 }
