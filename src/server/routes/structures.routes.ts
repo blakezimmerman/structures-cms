@@ -4,16 +4,12 @@ import { InsertOneWriteOpResult, UpdateWriteOpResult,
 import { Structure } from 'models/structure.model';
 import { getStructures, createStructure,
          updateStructure, deleteStructure } from '../data/structures.data';
+import { checkMatchFound } from './index';
 
 const router = express.Router();
 
 const validateStruct = (x: any) =>
   x._id && x.name && x.description && x.fields;
-
-const checkMatchFound = (x: any, res: express.Response) =>
-  !x.result.n || x.result.n < 1
-    ? res.status(500).json('Could not find a matching structure')
-    : res.json(x);
 
 router.get('/', (req, res) => {
   getStructures()

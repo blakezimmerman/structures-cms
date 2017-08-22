@@ -1,4 +1,5 @@
 import { structuresCollection } from './mongo.collection';
+import { deleteAllEntries } from './entries.data';
 import { Collection } from 'mongodb';
 import { Structure } from 'models/structure.model';
 
@@ -22,6 +23,8 @@ export const updateStructure = (struct: Structure) => {
 
 export const deleteStructure = (id: string) => {
   return structuresCollection()
-    .then((x: Collection) => x.deleteOne({_id: id}))
-    .catch((e: any) => Promise.reject(e))
+    .then((x: Collection) => {
+      deleteAllEntries(id)
+      return x.deleteOne({_id: id})
+    }).catch((e: any) => Promise.reject(e))
 };

@@ -6,7 +6,7 @@ export interface Entry {
   _id: string;
   type: string;
   title: string;
-  blurb: string;
+  description: string;
   author: User;
   dateCreated: Date;
   fields: EntryField[];
