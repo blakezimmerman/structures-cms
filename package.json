@@ -6,6 +6,8 @@
   "scripts": {
     "start": "nodemon --watch 'src/server/**/*.ts' --exec 'ts-node' src/server/app.ts",
     "start:prod": "nodemon --watch 'src/server/**/*.ts' --exec NODE_ENV=prod 'ts-node' src/server/app.ts",
+    "start:clean": "nodemon --watch 'src/server/**/*.ts' --exec CLEAN=true 'ts-node' src/server/app.ts",
+    "start:prod:clean": "nodemon --watch 'src/server/**/*.ts' --exec NODE_ENV=prod CLEAN=true 'ts-node' src/server/app.ts",
     "build": "rimraf dist && webpack --config webpack/webpack.prod.js --bail",
     "clean": "rimraf dist"
   },

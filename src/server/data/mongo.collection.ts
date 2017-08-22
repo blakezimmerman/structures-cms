@@ -16,6 +16,12 @@ let getCollection = (collection: string) => {
   }
 }
 
+if (process.env.CLEAN) {
+  ['structures', 'entries', 'users'].forEach(collection =>
+    dbConnection().then(db => db.collection(collection).remove({}))
+  );
+}
+
 export const structuresCollection = getCollection('structures');
 export const entriesCollection = getCollection('entries');
 export const usersCollection = getCollection('users');
