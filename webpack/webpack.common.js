@@ -5,10 +5,14 @@ const path = require('path');
 const APP_DIR = path.resolve(__dirname, '../src/client');
 
 module.exports = {
-  entry: APP_DIR + '/index.tsx',
+  entry: [APP_DIR + '/index.tsx'],
 
   resolve: {
-    extensions: ['.js', '.ts','.tsx']
+    extensions: ['.js', '.ts','.tsx'],
+    modules: [
+      path.resolve('./src'),
+      path.resolve('./node_modules')
+    ]
   },
 
   module: {

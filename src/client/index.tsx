@@ -4,6 +4,7 @@ import { StyleRoot, Style } from 'radium';
 import { globalStyles } from './globalStyles';
 import { Provider } from 'react-redux';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import app from './app/app.reducer';
 import App from './app/app';
@@ -14,7 +15,7 @@ const rootReducer = combineReducers({
 
 export let store = createStore(
   rootReducer,
-  applyMiddleware(logger)
+  applyMiddleware(thunk, logger)
 );
 
 render(
