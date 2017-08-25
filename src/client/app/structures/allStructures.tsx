@@ -22,7 +22,11 @@ const structure = (struct: Structure) =>
 
 const AllStructures = (props: Props) => (
   <div style={structureStyles.structsContainer}>
-    {props.structs.map(x => structure(x))}
+    {fromNullable(props.structs)
+       .fold((e: any) => "An Error Occured",
+             (x: Structure[]) => !x.length ?
+                "Loading" :  x.map(y => structure(y)))
+    }
   </div>
 );
 

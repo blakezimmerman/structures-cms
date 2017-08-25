@@ -1,5 +1,7 @@
+import axios from 'axios';
 const API_URL = 'http://localhost:3000/api/';
 
 export const fetchStructures = () =>
-  fetch(API_URL + 'structures')
-    .then(res => res.json());
+  axios.get(API_URL + 'structures')
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));

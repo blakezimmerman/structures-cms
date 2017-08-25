@@ -18,6 +18,7 @@
     "url": "https://github.com/blakezimmerman/structures-cms.git"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "radium": "^0.19.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -28,6 +29,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/body-parser": "^1.16.4",
     "@types/cookie-parser": "^1.4.0",
     "@types/express": "^4.0.36",
