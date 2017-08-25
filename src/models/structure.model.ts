@@ -5,4 +5,5 @@ export interface Structure {
   name: string;
   description: string;
   fields: Field[];
+  count?: number;
 }

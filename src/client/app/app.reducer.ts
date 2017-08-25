@@ -7,17 +7,17 @@ export interface State {
 };
 
 export interface AppState {
-  structures: Structure[];
+  structs: Structure[];
 };
 
 const initialState: AppState = {
-  structures: []
+  structs: []
 };
 
 const app = (state = initialState, action: Action) => {
   switch (action.type) {
     case GET_STRUCTURES:
-      return { ...state, structures: action.payload }
+      return { ...state, structs: action.payload }
     default:
       return state;
   }

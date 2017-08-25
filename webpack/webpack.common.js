@@ -19,7 +19,7 @@ module.exports = {
     loaders : [
       {
         test: /\.tsx?$/,
-        include : APP_DIR,
+        include : path.resolve(__dirname, '../'),
         use: 'awesome-typescript-loader'
       },
       {

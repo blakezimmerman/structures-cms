@@ -5,6 +5,8 @@ import { Structure } from 'models/structure.model';
 import { getStructures, createStructure,
          updateStructure, deleteStructure } from '../data/structures.data';
 import { checkMatchFound } from './index';
+import { Entry } from 'models/entry.model';
+import { getEntries } from '../data/entries.data';
 
 const router = express.Router();
 
@@ -13,7 +15,11 @@ const validateStruct = (x: any) =>
 
 router.get('/', (req, res) => {
   getStructures()
-    .then((x: Structure[]) => res.json(x))
+    .then((data: Structure[]) => Promise.all(data
+      .map(struct => getEntries(struct._id)
+        .then((entries: Entry[]) => ({...struct, count: entries.length}),
+              (e: any) => ({...struct, count: undefined})))))
+      .then((structs: Structure[]) => res.json(structs))
     .catch((e: any) => res.status(500).json({e}))
 });
 

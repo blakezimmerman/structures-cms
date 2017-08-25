@@ -5,3 +5,5 @@ export const globalStyles = {
     margin: 0
   }
 }
+
+export const primaryColor = 'mediumslateblue';
