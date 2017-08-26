@@ -6,9 +6,11 @@ import { Action } from './app.actions';
 import * as appActions from './app.actions';
 import { Structure } from 'models/structure.model';
 import appStyles from './app.styles';
+import Header from './header/header';
 import AllStructures from './structures/allStructures';
 
 interface Props {
+  heading: JSX.Element;
   structs: Structure[];
   getStructures: () => Promise<Action>;
 }
@@ -25,7 +27,9 @@ class App extends React.Component<Props, {}> {
   render() {
     return (
       <div style={appStyles.appContainer}>
-        <h1 style={appStyles.header}>Structures: A Customizable CMS</h1>
+        <Header>
+          {this.props.heading}
+        </Header>
         <AllStructures structs={this.props.structs} />
       </div>
     );

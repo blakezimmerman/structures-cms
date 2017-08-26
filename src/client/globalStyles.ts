@@ -6,4 +6,4 @@ export const globalStyles = {
   }
 }
 
-export const primaryColor = 'mediumslateblue';
+export const primaryColor = '#7b68ee';
