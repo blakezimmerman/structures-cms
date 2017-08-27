@@ -5,7 +5,7 @@ import usersRoutes from './users.routes';
 
 export const checkMatchFound = (x: any, res: express.Response) =>
   !x.result.n || x.result.n < 1
-    ? res.status(500).json('Could not find a matching structure')
+    ? res.status(500).json('Could not find a matching object')
     : res.json(x);
 
 const ApiRoutes = (app: express.Express) => {
