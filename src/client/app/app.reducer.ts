@@ -1,28 +1,27 @@
 import { Action } from './app.actions';
-import { UPDATE_HEADER, GET_STRUCTURES } from './app.actions';
-import { Structure } from 'models/structure.model';
+import { UPDATE_HEADER } from './app.actions';
 import heading from './header/heading';
+import { StructuresState } from './structures/structures.reducer';
+import { LoginState } from './login/login.reducer';
 
 export interface State {
   app: AppState;
+  structures: StructuresState;
+  login: LoginState
 };
 
 export interface AppState {
-  heading: JSX.Element;
-  structs: Structure[];
+  heading: React.ComponentClass<{}>;
 };
 
 const initialState: AppState = {
-  heading: heading,
-  structs: []
+  heading: heading
 };
 
 const app = (state = initialState, action: Action) => {
   switch (action.type) {
     case UPDATE_HEADER:
       return { ...state, heading: action.payload };
-    case GET_STRUCTURES:
-      return { ...state, structs: action.payload };
     default:
       return state;
   }

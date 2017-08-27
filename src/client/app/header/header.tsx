@@ -2,14 +2,16 @@ import * as React from 'react';
 import * as Radium from 'radium';
 import headerStyles from './header.styles';
 import { Action } from '../app.actions';
-import { ClickToAction, Button } from '../shared/button';
+import { ClickFunction, Button } from '../shared/button';
 import { primaryColor } from 'client/globalStyles';
+import { History } from 'history';
 
 interface Props {
-  children: JSX.Element;
+  history: History,
+  children: React.ComponentClass<{}>;
 }
 
-const headerButton = (text: string) =>//, callback: ClickToAction) =>
+const headerButton = (text: string, callback: ClickFunction) =>
   <Button
     text={text}
     color={primaryColor}
@@ -18,15 +20,21 @@ const headerButton = (text: string) =>//, callback: ClickToAction) =>
       padding: '0.6rem 1rem',
       border: '1px solid white'
     }}
-    //callback={callback}
+    callback={callback}
   />
+
+const toLogin = (history: History) => (event: React.MouseEvent<HTMLElement>) =>
+  history.push('/login');
+
+const toAdmin = (history: History) => (event: React.MouseEvent<HTMLElement>) =>
+  history.push('/admin');
 
 const Header = (props: Props) =>
   <div style={headerStyles.header}>
-    {props.children}
+    <props.children/>
     <div style={headerStyles.buttonContainer}>
-      {headerButton('Log In')}
-      {headerButton('Admin')}
+      {headerButton('Log In', toLogin(props.history))}
+      {headerButton('Admin', toAdmin(props.history))}
     </div>
   </div>;
 

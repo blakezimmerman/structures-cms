@@ -3,14 +3,14 @@ import * as Radium from 'radium';
 import { Action } from '../app.actions';
 import { colorLuminance } from 'utils/functions';
 
-type ClickToAction = (event: React.MouseEvent<HTMLElement>) => Action
+type ClickFunction = (event: React.MouseEvent<HTMLElement>) => any;
 
 interface Props {
   id?: string,
   text: string,
   color: string,
   styles?: object,
-  callback?: ClickToAction,
+  callback?: ClickFunction,
   disabled?: boolean
 }
 
@@ -40,8 +40,8 @@ const button = (props: Props) => {
       {props.text}
     </button>
   );
-}
+};
 
 const Button = Radium(button);
 
-export { ClickToAction, Button };
+export { ClickFunction, Button };

@@ -1,18 +1,20 @@
 import * as React from 'react';
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { withRouter, Switch, Route } from 'react-router-dom';
+import { History } from 'history';
 import * as Radium from 'radium';
 import { State } from './app.reducer';
 import { Action } from './app.actions';
 import * as appActions from './app.actions';
-import { Structure } from 'models/structure.model';
 import appStyles from './app.styles';
 import Header from './header/header';
-import AllStructures from './structures/allStructures';
+import AllStructures from './structures/structures.container';
+import Login from './login/login.container';
+import Admin from './admin/admin.container';
 
 interface Props {
-  heading: JSX.Element;
-  structs: Structure[];
-  getStructures: () => Promise<Action>;
+  history: History;
+  heading: React.ComponentClass<{}>;
 }
 
 class App extends React.Component<Props, {}> {
@@ -20,17 +22,17 @@ class App extends React.Component<Props, {}> {
     super();
   }
 
-  componentDidMount() {
-    this.props.getStructures();
-  }
-
   render() {
     return (
       <div style={appStyles.appContainer}>
-        <Header>
+        <Header history={this.props.history}>
           {this.props.heading}
         </Header>
-        <AllStructures structs={this.props.structs} />
+        <Switch>
+          <Route exact path='/' component={AllStructures}/>
+          <Route exact path='/login' component={Login}/>
+          <Route exact path='/admin' component={Admin}/>
+        </Switch>
       </div>
     );
   }
@@ -38,8 +40,4 @@ class App extends React.Component<Props, {}> {
 
 const mapStateToProps = (state: State) => ({...state.app});
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  getStructures: () => dispatch(appActions.getStructures())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Radium(App));
+export default withRouter(connect(mapStateToProps)(Radium(App))) as React.ComponentClass<{}>;
