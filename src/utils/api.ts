@@ -8,6 +8,11 @@ export const fetchStructures = () =>
     .then(res => res.data)
     .catch(e => Promise.reject(e));
 
+export const fetchEntries = (struct: string) =>
+  axios.get(API_URL + 'entries/' + struct)
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));
+
 export const loginRequest = (user: NewUser) =>
   axios.post(API_URL + 'auth/login', user)
     .then(res => res.data)

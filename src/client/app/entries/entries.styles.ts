@@ -1,15 +1,15 @@
 import { CSSProperties } from 'react';
 import { primaryColor } from 'client/globalStyles';
 
-const structureStyles: CSSProperties = {
-  structsContainer: {
+const entriesStyles: CSSProperties = {
+  entriesContainer: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     maxWidth: '800px'
   },
 
-  struct: {
+  entry: {
     display: 'flex',
     margin: '0.5rem 1rem',
     padding: '1rem',
@@ -23,4 +23,4 @@ const structureStyles: CSSProperties = {
   }
 };
 
-export default structureStyles;
+export default entriesStyles;

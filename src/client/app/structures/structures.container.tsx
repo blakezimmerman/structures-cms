@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as Radium from 'radium';
 import { connect, Dispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import { History } from 'history';
 import { State } from '../app.reducer';
 import { Action } from '../app.actions';
 import * as structActions from './structures.actions';
@@ -10,8 +11,10 @@ import structureStyles from './structure.styles';
 import { fromNullable } from 'utils/functions';
 
 interface Props {
+  isFetching: boolean;
   structs: Structure[];
   getStructures: () => Promise<Action>;
+  history: History;
 }
 
 class AllStructures extends React.Component<Props, {}> {
@@ -23,9 +26,12 @@ class AllStructures extends React.Component<Props, {}> {
     this.props.getStructures();
   }
 
+  toEntries = (history: History, id: string) =>
+    (event: React.MouseEvent<HTMLElement>) =>  history.push('/' + id);
+
   render() {
     const structure = (struct: Structure) =>
-      <div style={structureStyles.struct} key={struct._id}>
+      <div style={structureStyles.struct} key={struct._id} onClick={this.toEntries(this.props.history, struct._id)}>
         <div style={structureStyles.info}>{struct.name}</div>
         <div style={structureStyles.info}>{struct.description}</div>
         <div style={structureStyles.info}>
@@ -38,15 +44,17 @@ class AllStructures extends React.Component<Props, {}> {
 
     return (
       <div style={structureStyles.structsContainer}>
-        {fromNullable(this.props.structs)
-          .fold((e: any) => "An Error Occured",
-                (x: Structure[]) => !x.length ?
-                    "Loading" :  x.map(y => structure(y)))
+        {this.props.isFetching ? "Loading" :
+          fromNullable(this.props.structs)
+            .fold((e: any) => "An Error Occured",
+              (x: Structure[]) => !x.length ?
+                "No Structures Yet" :  x.map(y => structure(y)))
         }
       </div>
     );
   }
 }
+
 const mapStateToProps = (state: State) => ({...state.structures});
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({

@@ -9,6 +9,7 @@ import * as appActions from './app.actions';
 import appStyles from './app.styles';
 import Header from './header/header';
 import AllStructures from './structures/structures.container';
+import AllEntries from './entries/entries.container';
 import Login from './login/login.container';
 import Register from './login/register';
 import Admin from './admin/admin.container';
@@ -40,9 +41,10 @@ class App extends React.Component<Props, {}> {
             : <Route exact path='/login' component={Login}/>
           }
           {this.props.user && this.props.user.isAdmin
-            ? <Route exact path='/admin' component={Admin}/>
-            : <Route exact path='/admin' component={ErrorPage}/>
+            ? <Route path='/admin' component={Admin}/>
+            : <Route path='/admin' component={ErrorPage}/>
           }
+          <Route exact path='/:struct' component={AllEntries}/>
         </Switch>
       </div>
     );

@@ -9,12 +9,14 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import app from './app/app.reducer';
 import structures from './app/structures/structures.reducer';
+import entries from './app/entries/entries.reducer';
 import login from './app/login/login.reducer';
 import App from './app/app.container';
 
 const rootReducer = combineReducers({
   app,
   structures,
+  entries,
   login
 });
 

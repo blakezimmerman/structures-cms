@@ -2,11 +2,13 @@ import { Action } from './app.actions';
 import { UPDATE_HEADER } from './app.actions';
 import heading from './header/heading';
 import { StructuresState } from './structures/structures.reducer';
+import { EntriesState } from './entries/entries.reducer';
 import { LoginState } from './login/login.reducer';
 
 export interface State {
   app: AppState;
   structures: StructuresState;
+  entries: EntriesState;
   login: LoginState
 };
 
