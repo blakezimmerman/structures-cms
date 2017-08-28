@@ -1,11 +1,24 @@
 import { Dispatch } from 'react-redux';
 import { Action } from '../app.actions';
-import { fetchUsers, makeAdminRequest } from 'utils/api';
+import { Structure } from 'models/structure.model';
+import {
+  fetchUsers, makeAdminRequest,
+  newStructureRequest, updateStructureRequest, deleteStructureRequest,
+} from 'utils/api';
+import { getStructures } from '../structures/structures.actions';
 
 export const GET_USERS = 'GET_USERS';
 export const MAKE_ADMIN_SUCCESS = 'MAKE_ADMIN_SUCCESS';
 export const MAKE_ADMIN_FAILURE = 'MAKE_ADMIN_FAILURE';
 export const IS_FETCHING ='IS_FETCHING';
+
+export const NEW_STRUCTURE_SUCCESS = 'NEW_STRUCTURE_SUCCESS';
+export const UPDATE_STRUCTURE_SUCCESS = 'UPDATE_STRUCTURE_SUCCESS';
+export const DELETE_STRUCTURE_SUCCESS = 'DELETE_STRUCTURE_SUCCESS';
+
+export const NEW_STRUCTURE_FAILURE = 'NEW_STRUCTURE_FAILURE';
+export const UPDATE_STRUCTURE_FAILURE = 'UPDATE_STRUCTURE_FAILURE';
+export const DELETE_STRUCTURE_FAILURE = 'DELETE_STRUCTURE_FAILURE';
 
 export const getUsers = () =>
   (dispatch: Dispatch<Action>) => {
@@ -28,7 +41,7 @@ export const makeAdmin = (userName: string) =>
     makeAdminRequest(userName).then(
       success => {
         getUsers()(dispatch);
-        dispatch({
+        return dispatch({
           type: MAKE_ADMIN_SUCCESS,
         })
       },
@@ -38,3 +51,42 @@ export const makeAdmin = (userName: string) =>
       })
     );
   };
+
+export const newStructure = (struct: Structure) =>
+  (dispatch: Dispatch<Action>) =>
+    newStructureRequest(struct).then(
+      success => dispatch({
+        type: NEW_STRUCTURE_SUCCESS,
+      }),
+      error => dispatch({
+        type: NEW_STRUCTURE_FAILURE,
+        error: error
+      })
+    );
+
+export const updateStructure = (struct: Structure) =>
+  (dispatch: Dispatch<Action>) =>
+    updateStructureRequest(struct).then(
+      success => dispatch({
+        type: UPDATE_STRUCTURE_SUCCESS,
+      }),
+      error => dispatch({
+        type: MAKE_ADMIN_FAILURE,
+        error: error
+      })
+    );
+
+export const deleteStructure = (id: string) =>
+  (dispatch: Dispatch<Action>) =>
+    deleteStructureRequest(id).then(
+      success => {
+        getStructures()(dispatch)
+        return dispatch({
+          type: DELETE_STRUCTURE_SUCCESS,
+        })
+      },
+      error => dispatch({
+        type: DELETE_STRUCTURE_FAILURE,
+        error: error
+      })
+    );

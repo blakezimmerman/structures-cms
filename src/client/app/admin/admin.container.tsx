@@ -1,25 +1,13 @@
 import * as React from 'react';
 import * as Radium from 'radium';
-import { connect, Dispatch } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import { History } from 'history';
-import { State } from '../app.reducer';
-import { Action } from '../app.actions';
 import adminStyles from './admin.styles';
-import { ClickFunction, Button } from '../shared/button';
-import * as structActions from '../structures/structures.actions';
-import * as entriesActions from '../entries/entries.actions';
-import { Structure } from 'models/structure.model';
-import { Entry } from 'models/entry.model';
-import { fromNullable } from 'utils/functions';
+import { Button } from '../shared/button';
 import UsersPanel from './usersPanel';
+import StructsPanel from './structsPanel';
 
 interface Props {
-  isFetching: boolean;
-  structs: Structure[];
-  entries: Entry[];
-  getStructures: () => Promise<Action>;
-  getEntries: (struct: string) => Promise<Action>;
   history: History;
 }
 class AdminPanel extends React.Component<Props, {}> {
@@ -57,17 +45,11 @@ class AdminPanel extends React.Component<Props, {}> {
             <h1 style={adminStyles.h1}>Pick a category above</h1>
           }/>
           <Route exact path='/admin/users' component={UsersPanel}/>
+          <Route exact path='/admin/structures' component={StructsPanel}/>
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: State) => ({...state.structures, ...state.entries});
-
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  getStructures: () => dispatch(structActions.getStructures()),
-  getEntries: (struct: string) => dispatch(entriesActions.getEntries(struct))
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Radium(AdminPanel)));
+export default withRouter(Radium(AdminPanel));

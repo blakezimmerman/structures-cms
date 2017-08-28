@@ -30,7 +30,7 @@ const adminStyles: CSSProperties = {
     marginTop: '1rem'
   },
 
-  user: {
+  listItem: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -38,10 +38,18 @@ const adminStyles: CSSProperties = {
     padding: '1rem',
     border: '1px solid ' + primaryColor,
     borderRadius: '5px',
-    minWidth: '100%'
+    minWidth: '100%',
+    maxWidth: '800px',
   },
 
   info: {
+    margin: '0 1rem'
+  },
+
+  actionButtons: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     margin: '0 1rem'
   }
 };

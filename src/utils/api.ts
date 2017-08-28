@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { NewUser } from 'models/user.model';
+import { Structure } from 'models/structure.model';
 
 const API_URL = 'http://localhost:3000/api/';
 
@@ -33,8 +34,22 @@ export const fetchUsers = () =>
     .then(res => res.data)
     .catch(e => Promise.reject(e));
 
-
 export const makeAdminRequest = (userName: string) =>
   axios.get(API_URL + 'users/makeadmin/' + userName)
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));
+
+export const newStructureRequest = (struct: Structure) =>
+  axios.post(API_URL + 'structures/new', struct)
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));
+
+export const updateStructureRequest = (struct: Structure) =>
+  axios.put(API_URL + 'structures/update', struct)
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));
+
+export const deleteStructureRequest = (id: string) =>
+  axios.get(API_URL + 'structures/delete/' + id)
     .then(res => res.data)
     .catch(e => Promise.reject(e));

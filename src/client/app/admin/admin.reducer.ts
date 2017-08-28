@@ -2,6 +2,8 @@ import { State } from '../app.reducer';
 import { Action } from '../app.actions';
 import {
   GET_USERS, MAKE_ADMIN_SUCCESS, MAKE_ADMIN_FAILURE,
+  NEW_STRUCTURE_SUCCESS, UPDATE_STRUCTURE_SUCCESS, DELETE_STRUCTURE_SUCCESS,
+  NEW_STRUCTURE_FAILURE, UPDATE_STRUCTURE_FAILURE, DELETE_STRUCTURE_FAILURE,
   IS_FETCHING
 } from './admin.actions';
 import { User } from 'models/user.model';
@@ -43,6 +45,36 @@ const login = (state = initialState, action: Action) => {
       return {
         ...state,
         isFetching: true
+      };
+    case NEW_STRUCTURE_SUCCESS:
+      return {
+        ...state,
+        error: ''
+      };
+    case NEW_STRUCTURE_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+    case UPDATE_STRUCTURE_SUCCESS:
+      return {
+        ...state,
+        error: ''
+      };
+    case UPDATE_STRUCTURE_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+    case DELETE_STRUCTURE_SUCCESS:
+      return {
+        ...state,
+        error: ''
+      };
+    case DELETE_STRUCTURE_FAILURE:
+      return {
+        ...state,
+        error: action.payload
       };
     default:
       return state;

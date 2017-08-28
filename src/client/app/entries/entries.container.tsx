@@ -45,11 +45,11 @@ class AllStructures extends React.Component<Props, {}> {
 
     return (
       <div style={entriesStyles.structsContainer}>
-        {this.props.isFetching ? "Loading" :
+        {this.props.isFetching ? 'Loading' :
           fromNullable(this.props.entries)
-            .fold((e: any) => "An Error Occured",
+            .fold((e: any) => 'An Error Occured',
               (x: Entry[]) => !x.length ?
-                "No Entries Yet" :  x.map(y => entry(y)))
+                'No Entries Yet' :  x.map(y => entry(y)))
         }
       </div>
     );

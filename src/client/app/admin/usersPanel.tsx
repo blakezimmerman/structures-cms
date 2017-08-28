@@ -45,7 +45,7 @@ class UsersPanel extends React.Component<Props, {}> {
     const user = (user: User) =>
       <div
         key={user.userName}
-        style={adminStyles.user}
+        style={adminStyles.listItem}
       >
         <div style={adminStyles.info}>{user.userName}</div>
         <div style={adminStyles.info}>Is Admin: {user.isAdmin ? 'Yes' : 'No'}</div>
@@ -57,11 +57,11 @@ class UsersPanel extends React.Component<Props, {}> {
     return (
       <div style={adminStyles.adminContainer}>
         Users Panel
-        {this.props.isFetching ? "Loading" :
+        {this.props.isFetching ? 'Loading' :
           fromNullable(this.props.users)
-            .fold((e: any) => "An Error Occured",
+            .fold((e: any) => 'An Error Occured',
               (x: User[]) => !x.length ?
-                "No Users Yet" :  x.map(y => user(y)))
+                'No Users Yet' :  x.map(y => user(y)))
         }
       </div>
     );
