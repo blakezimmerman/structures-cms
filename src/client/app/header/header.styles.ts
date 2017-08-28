@@ -9,7 +9,6 @@ const headerStyles: CSSProperties = {
     textAlign: 'center',
     width: '100%',
     height: '7rem',
-    margin: '0 0 1rem 0',
     fontWeight: '300',
     color: 'white',
     backgroundColor: primaryColor

@@ -11,6 +11,7 @@ const entriesStyles: CSSProperties = {
 
   entry: {
     display: 'flex',
+    justifyContent: 'center',
     margin: '0.5rem 1rem',
     padding: '1rem',
     border: '1px solid ' + primaryColor,

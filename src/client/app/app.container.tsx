@@ -41,10 +41,11 @@ class App extends React.Component<Props, {}> {
             ? <Route exact path='/login' component={AllStructures}/>
             : <Route exact path='/login' component={Login}/>
           }
-          {this.props.user && this.props.user.isAdmin
+          {/* {this.props.user && this.props.user.isAdmin
             ? <Route path='/admin' component={Admin}/>
             : <Route path='/admin' component={ErrorPage}/>
-          }
+          } */}
+          <Route path='/admin' component={Admin}/>
           <Route exact path='/:struct' component={AllEntries}/>
           <Route exact path='/:struct/:slug' component={EntryPage}/>
         </Switch>

@@ -28,6 +28,12 @@ export const registerRequest = (user: NewUser) =>
     .then(res => res.data)
     .catch(e => Promise.reject(e));
 
+export const fetchUsers = () =>
+  axios.get(API_URL + 'users/all')
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));
+
+
 export const makeAdminRequest = (userName: string) =>
   axios.get(API_URL + 'users/makeadmin/' + userName)
     .then(res => res.data)

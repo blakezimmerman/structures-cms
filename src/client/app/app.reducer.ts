@@ -4,12 +4,14 @@ import heading from './header/heading';
 import { StructuresState } from './structures/structures.reducer';
 import { EntriesState } from './entries/entries.reducer';
 import { LoginState } from './login/login.reducer';
+import { AdminState } from './admin/admin.reducer';
 
 export interface State {
   app: AppState;
   structures: StructuresState;
   entries: EntriesState;
-  login: LoginState
+  login: LoginState;
+  admin: AdminState;
 };
 
 export interface AppState {
