@@ -37,11 +37,11 @@ class StructsPanel extends React.Component<Props, {}> {
 
   toEntries = (id: string) =>
     (event: React.MouseEvent<HTMLElement>) =>
-      this.props.history.push('/admin/structures/'+ id + '/list')
+      this.props.history.push('/admin/structures/list/'+ id)
 
   toEdit = (id: string) =>
       (event: React.MouseEvent<HTMLElement>) =>
-        this.props.history.push('/admin/structures/' + id)
+        this.props.history.push('/admin/structures/edit/' + id)
 
   startDeleteStructure = (id: string) =>
     (event: React.MouseEvent<HTMLElement>) =>

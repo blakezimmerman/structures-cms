@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, match } from 'react-router-dom';
 import { History } from 'history';
 import * as Radium from 'radium';
 import adminStyles from './admin.styles';
@@ -14,11 +14,15 @@ import { FieldType, Field } from 'models/field.model';
 import * as uuid from 'uuid/v4';
 
 interface Props {
+  structs: Structure[];
   newStructure: (struct: Structure) => Promise<Action>;
+  updateStructure: (struct: Structure) => Promise<Action>;
   history: History;
+  match: match<any>;
 }
 
 interface UIState {
+  isNew: boolean;
   nameInput: string;
   descriptionInput: string;
   field1Label: string;
@@ -37,6 +41,7 @@ class NewStructurePanel extends React.Component<Props, UIState> {
   constructor() {
     super();
     this.state = {
+      isNew: true,
       nameInput: '',
       descriptionInput: '',
       field1Label: '',
@@ -49,6 +54,27 @@ class NewStructurePanel extends React.Component<Props, UIState> {
       field4Type: FieldType.TextInput,
       field5Label: '',
       field5Type: FieldType.TextInput,
+    }
+  }
+
+  componentWillMount() {
+    if (this.props.match.params.id) {
+      const struct = this.props.structs.filter(x => x._id === this.props.match.params.id)[0];
+      this.setState({
+        isNew: false,
+        nameInput: struct.name,
+        descriptionInput: struct.description,
+        field1Label: struct.fields[0].label,
+        field1Type: struct.fields[0].type,
+        field2Label: struct.fields[1].label,
+        field2Type: struct.fields[1].type,
+        field3Label: struct.fields[2].label,
+        field3Type: struct.fields[2].type,
+        field4Label: struct.fields[3].label,
+        field4Type: struct.fields[3].type,
+        field5Label: struct.fields[4].label,
+        field5Type: struct.fields[4].type,
+      });
     }
   }
 
@@ -110,14 +136,17 @@ class NewStructurePanel extends React.Component<Props, UIState> {
     { label: this.state.field5Label, type: this.state.field5Type },
   ];
 
-  createButton = (event: React.MouseEvent<HTMLElement>) => {
+  submitButton = (event: React.MouseEvent<HTMLElement>) => {
     const struct: Structure = {
       _id: uuid(),
       name: this.state.nameInput,
       description: this.state.descriptionInput,
       fields: this.buildFields()
     };
-    return this.props.newStructure(struct);
+    return (this.state.isNew
+      ? this.props.newStructure(struct)
+      : this.props.updateStructure(struct)
+    );
   }
 
   render() {
@@ -157,7 +186,7 @@ class NewStructurePanel extends React.Component<Props, UIState> {
 
     return (
       <div style={adminStyles.adminContainer}>
-        Create a new structure
+        {this.state.isNew ? 'Create a new structure' : 'Edit this structure'}
         {textInput('Name', this.state.nameInput, 'nameInput')}
         {textInput('Description', this.state.descriptionInput, 'descriptionInput')}
         {fieldForm(1, this.state.field1Label, this.state.field1Type)}
@@ -166,9 +195,9 @@ class NewStructurePanel extends React.Component<Props, UIState> {
         {fieldForm(4, this.state.field4Label, this.state.field4Type)}
         {fieldForm(5, this.state.field5Label, this.state.field5Type)}
         <Button
-          text={'Create Structure'}
+          text={this.state.isNew ? 'Create Structure': 'Update Structure'}
           color={'#fff'}
-          callback={this.createButton}
+          callback={this.submitButton}
           styles={{
             color: primaryColor,
             minWidth: '60%',
@@ -182,8 +211,11 @@ class NewStructurePanel extends React.Component<Props, UIState> {
   }
 }
 
+const mapStateToProps = (state: State) => ({structs: state.structures.structs});
+
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  newStructure: (struct: Structure) => dispatch(adminActions.newStructure(struct))
+  newStructure: (struct: Structure) => dispatch(adminActions.newStructure(struct)),
+  updateStructure: (struct: Structure) => dispatch(adminActions.updateStructure(struct))
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(Radium(NewStructurePanel)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Radium(NewStructurePanel)));
