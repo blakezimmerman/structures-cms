@@ -21,10 +21,6 @@ module.exports = {
         test: /\.tsx?$/,
         include : path.resolve(__dirname, '../'),
         use: 'awesome-typescript-loader'
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        use: 'file-loader?name=assets/[name].[hash].[ext]'
       }
     ]
   },
