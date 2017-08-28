@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Radium from 'radium';
 import { connect, Dispatch } from 'react-redux';
-import { withRouter, match } from 'react-router-dom';
+import { withRouter, Route, match } from 'react-router-dom';
 import { History } from 'history';
 import { State } from '../app.reducer';
 import { Action } from '../app.actions';
@@ -27,9 +27,17 @@ class AllStructures extends React.Component<Props, {}> {
     this.props.getEntries(this.props.match.params.struct);
   }
 
+  toEntry = (history: History, slug: string) =>
+    (event: React.MouseEvent<HTMLElement>) =>
+      history.push('/' + this.props.match.params.struct + '/' + slug);
+
   render() {
     const entry = (entry: Entry) =>
-    <div style={entriesStyles.entry} key={entry._id}>
+    <div
+      key={entry._id}
+      style={entriesStyles.entry}
+      onClick={this.toEntry(this.props.history, entry._id)}
+    >
       <div style={entriesStyles.info}>{entry.title}</div>
       <div style={entriesStyles.info}>Created: {entry.dateCreated}</div>
       <div style={entriesStyles.info}>Comments: {entry.comments.length}</div>

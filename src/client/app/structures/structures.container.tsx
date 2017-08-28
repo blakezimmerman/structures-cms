@@ -27,11 +27,15 @@ class AllStructures extends React.Component<Props, {}> {
   }
 
   toEntries = (history: History, id: string) =>
-    (event: React.MouseEvent<HTMLElement>) =>  history.push('/' + id);
+    (event: React.MouseEvent<HTMLElement>) => history.push('/' + id);
 
   render() {
     const structure = (struct: Structure) =>
-      <div style={structureStyles.struct} key={struct._id} onClick={this.toEntries(this.props.history, struct._id)}>
+      <div
+        key={struct._id}
+        style={structureStyles.struct}
+        onClick={this.toEntries(this.props.history, struct._id)}
+      >
         <div style={structureStyles.info}>{struct.name}</div>
         <div style={structureStyles.info}>{struct.description}</div>
         <div style={structureStyles.info}>

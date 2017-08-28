@@ -10,6 +10,7 @@ import appStyles from './app.styles';
 import Header from './header/header';
 import AllStructures from './structures/structures.container';
 import AllEntries from './entries/entries.container';
+import EntryPage from './entries/entryPage';
 import Login from './login/login.container';
 import Register from './login/register';
 import Admin from './admin/admin.container';
@@ -45,6 +46,7 @@ class App extends React.Component<Props, {}> {
             : <Route path='/admin' component={ErrorPage}/>
           }
           <Route exact path='/:struct' component={AllEntries}/>
+          <Route exact path='/:struct/:slug' component={EntryPage}/>
         </Switch>
       </div>
     );
