@@ -39,13 +39,13 @@ router.put('/update', (req, res) => {
     : res.status(500).json('Invalid Structure');
 });
 
-router.get('/:id/delete', (req, res) => {
+router.get('/delete/:id', (req, res) => {
   deleteEntry(req.params.id)
     .then((x: DeleteWriteOpResultObject) => checkMatchFound(x, res))
     .catch((e: any) => res.status(500).json({e}))
 });
 
-router.put('/:id/comment', (req, res) => {
+router.put('/comment/:id', (req, res) => {
   addComment(req.params.id, req.body)
     .then((x: UpdateWriteOpResult) => checkMatchFound(x, res))
     .catch((e: any) => res.status(500).json({e}))

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { NewUser } from 'models/user.model';
 import { Structure } from 'models/structure.model';
+import { Entry } from 'models/entry.model';
 
 const API_URL = 'http://localhost:3000/api/';
 
@@ -56,5 +57,20 @@ export const updateStructureRequest = (struct: Structure) =>
 
 export const deleteStructureRequest = (id: string) =>
   axios.get(API_URL + 'structures/delete/' + id)
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));
+
+export const newEntryRequest = (entry: Entry) =>
+  axios.post(API_URL + 'entries/new', entry)
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));
+
+export const updateEntryRequest = (entry: Entry) =>
+  axios.put(API_URL + 'entries/update', entry)
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));
+
+export const deleteEntryRequest = (id: string) =>
+  axios.get(API_URL + 'entries/delete/' + id)
     .then(res => res.data)
     .catch(e => Promise.reject(e));

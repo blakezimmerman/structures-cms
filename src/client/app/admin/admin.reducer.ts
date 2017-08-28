@@ -4,6 +4,8 @@ import {
   GET_USERS, MAKE_ADMIN_SUCCESS, MAKE_ADMIN_FAILURE,
   NEW_STRUCTURE_SUCCESS, UPDATE_STRUCTURE_SUCCESS, DELETE_STRUCTURE_SUCCESS,
   NEW_STRUCTURE_FAILURE, UPDATE_STRUCTURE_FAILURE, DELETE_STRUCTURE_FAILURE,
+  NEW_ENTRY_SUCCESS, UPDATE_ENTRY_SUCCESS, DELETE_ENTRY_SUCCESS,
+  NEW_ENTRY_FAILURE, UPDATE_ENTRY_FAILURE, DELETE_ENTRY_FAILURE,
   IS_FETCHING
 } from './admin.actions';
 import { User } from 'models/user.model';
@@ -20,7 +22,7 @@ const initialState: AdminState = {
   error: ''
 };
 
-const login = (state = initialState, action: Action) => {
+const admin = (state = initialState, action: Action) => {
   switch (action.type) {
     case GET_USERS:
       return {
@@ -76,9 +78,39 @@ const login = (state = initialState, action: Action) => {
         ...state,
         error: action.payload
       };
+      case NEW_ENTRY_SUCCESS:
+      return {
+        ...state,
+        error: ''
+      };
+    case NEW_ENTRY_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+    case UPDATE_ENTRY_SUCCESS:
+      return {
+        ...state,
+        error: ''
+      };
+    case UPDATE_ENTRY_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+    case DELETE_ENTRY_SUCCESS:
+      return {
+        ...state,
+        error: ''
+      };
+    case DELETE_ENTRY_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
     default:
       return state;
   }
 };
 
-export default login;
+export default admin;

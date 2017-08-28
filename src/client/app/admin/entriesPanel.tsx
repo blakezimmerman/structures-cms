@@ -1,54 +1,50 @@
 import * as React from 'react';
 import * as Radium from 'radium';
 import { connect, Dispatch } from 'react-redux';
-import { withRouter, Route } from 'react-router-dom';
+import { withRouter, Route, match } from 'react-router-dom';
 import { History } from 'history';
 import { State } from '../app.reducer';
 import { Action } from '../app.actions';
 import adminStyles from './admin.styles';
 import { primaryColor } from 'client/globalStyles';
 import { ClickFunction, Button } from '../shared/button';
-import * as structActions from '../structures/structures.actions';
+import * as entriesActions from '../entries/entries.actions';
 import * as adminActions from '../admin/admin.actions';
-import { Structure } from 'models/structure.model';
 import { Entry } from 'models/entry.model';
 import { fromNullable } from 'utils/functions';
 
 interface Props {
   isFetching: boolean;
-  structs: Structure[];
-  getStructures: () => Promise<Action>;
-  deleteStructure: (id: string) => Promise<Action>;
+  entries: Entry[];
+  getEntries: (struct: string) => Promise<Action>;
+  deleteEntry: (id: string, struct: string) => Promise<Action>;
   history: History;
+  match: match<any>;
 }
-class StructsPanel extends React.Component<Props, {}> {
+class EntriesPanel extends React.Component<Props, {}> {
   constructor() {
     super();
   }
 
   componentDidMount() {
-    this.props.getStructures();
+    this.props.getEntries(this.props.match.params.struct);
   }
 
   toNew = (event: React.MouseEvent<HTMLElement>) =>
-    this.props.history.push('/admin/structures/new')
-
-  toEntries = (id: string) =>
-    (event: React.MouseEvent<HTMLElement>) =>
-      this.props.history.push('/admin/structures/list/'+ id)
+    this.props.history.push('/admin/structures/new/' + this.props.match.params.struct)
 
   toEdit = (id: string) =>
       (event: React.MouseEvent<HTMLElement>) =>
-        this.props.history.push('/admin/structures/edit/' + id)
+        this.props.history.push('/admin/structures/edit/'+ this.props.match.params.struct + '/' + id)
 
-  startDeleteStructure = (id: string) =>
+  startDeleteEntry = (id: string) =>
     (event: React.MouseEvent<HTMLElement>) =>
-      this.props.deleteStructure(id);
+      this.props.deleteEntry(id, this.props.match.params.struct);
 
   render() {
-    const newStructButton =
+    const newEntryButton =
       <Button
-        text={'New Structure'}
+        text={'New Entry'}
         color={'#fff'}
         callback={this.toNew}
         styles={{
@@ -60,7 +56,7 @@ class StructsPanel extends React.Component<Props, {}> {
         }}
       />;
 
-    const structsButton = (text: string, callback: ClickFunction) =>
+    const entriesButton = (text: string, callback: ClickFunction) =>
       <Button
         text={text}
         color={primaryColor}
@@ -73,39 +69,38 @@ class StructsPanel extends React.Component<Props, {}> {
         }}
       />;
 
-    const structure = (struct: Structure) =>
+    const entry = (entry: Entry) =>
       <div
-        key={struct._id}
+        key={entry._id}
         style={adminStyles.listItem}
       >
-        <div style={adminStyles.info}>{struct.name}</div>
-        <div style={adminStyles.info}>{struct.description}</div>
+        <div style={adminStyles.info}>{entry.title}</div>
+        <div style={adminStyles.info}>{entry.description}</div>
         <div style={adminStyles.actionButtons}>
-          {structsButton('Entries', this.toEntries(struct._id))}
-          {structsButton('Edit', this.toEdit(struct._id))}
-          {structsButton('Delete', this.startDeleteStructure(struct._id))}
+          {entriesButton('Edit', this.toEdit(entry._id))}
+          {entriesButton('Delete', this.startDeleteEntry(entry._id))}
         </div>
       </div>;
 
     return (
       <div style={adminStyles.adminContainer}>
-        {newStructButton}
+        {newEntryButton}
         {this.props.isFetching ? 'Loading' :
-          fromNullable(this.props.structs)
+          fromNullable(this.props.entries)
             .fold((e: any) => 'An Error Occured',
-              (x: Structure[]) => !x.length ?
-                'No Structures Yet' :  x.map(y => structure(y)))
+              (x: Entry[]) => !x.length ?
+                'No Entries Yet' :  x.map(y => entry(y)))
         }
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: State) => ({...state.structures});
+const mapStateToProps = (state: State) => ({...state.entries});
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  getStructures: () => dispatch(structActions.getStructures()),
-  deleteStructure: (id: string) => dispatch(adminActions.deleteStructure(id))
+  getEntries: (struct: string) => dispatch(entriesActions.getEntries(struct)),
+  deleteEntry: (id: string, struct: string) => dispatch(adminActions.deleteEntry(id, struct))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Radium(StructsPanel)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Radium(EntriesPanel)));
