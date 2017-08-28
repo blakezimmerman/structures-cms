@@ -1,19 +1,57 @@
 import { State } from '../app.reducer';
 import { Action } from '../app.actions';
-import { LOGIN, LOGOUT, IS_AUTHENTICATED } from './login.actions';
+import {
+  LOGIN_SUCCESS, LOGIN_FAILURE,
+  LOGOUT_SUCCESS, LOGOUT_FAILURE,
+  IS_FETCHING
+} from './login.actions';
+import { User } from 'models/user.model';
 
 export interface LoginState {
-  isAuthenticated: boolean;
+  user: User | undefined;
+  isFetching: boolean;
+  error: string;
 };
 
 const initialState: LoginState = {
-  isAuthenticated: false
+  user: undefined,
+  isFetching: false,
+  error: ''
 };
 
 const login = (state = initialState, action: Action) => {
   switch (action.type) {
-    case IS_AUTHENTICATED:
-      return { ...state, isAuthenticated: action.payload };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+        isFetching: false,
+        error: ''
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        user: undefined,
+        isFetching: false,
+        error: ''
+      };
+    case LOGOUT_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      };
+    case IS_FETCHING:
+      return {
+        ...state,
+        isFetching: true
+      };
     default:
       return state;
   }

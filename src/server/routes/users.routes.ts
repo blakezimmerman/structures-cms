@@ -5,7 +5,6 @@ import { InsertOneWriteOpResult, UpdateWriteOpResult } from 'mongodb';
 import { NewUser, UserAccount } from 'models/user.model';
 import { getUser, createUser, makeAdmin } from '../data/users.data';
 import { checkMatchFound } from './index';
-import { tryCatch } from '../../utils/functions';
 
 const router = express.Router();
 
@@ -30,8 +29,8 @@ router.post('/new', (req, res) => {
     .catch((e: any) => res.status(500).json({e}))
 });
 
-router.get('/:id/makeadmin', (req, res) => {
-  makeAdmin(req.params.id)
+router.get('/:username/makeadmin', (req, res) => {
+  makeAdmin(req.params.username)
     .then((x: UpdateWriteOpResult) => checkMatchFound(x, res))
     .catch((e: any) => res.status(500).json({e}))
 });

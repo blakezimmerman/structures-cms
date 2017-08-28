@@ -14,8 +14,8 @@ export const createUser = (user: UserAccount) => {
     .catch((e: any) => Promise.reject(e))
 };
 
-export const makeAdmin = (id: string) => {
+export const makeAdmin = (userName: string) => {
   return usersCollection()
-    .then((x: Collection) => x.updateOne({_id: id},  {$set: {isAdmin: true}}))
+    .then((x: Collection) => x.updateOne({userName: userName},  {$set: {isAdmin: true}}))
     .catch((e: any) => Promise.reject(e))
 };

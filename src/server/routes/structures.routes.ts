@@ -7,6 +7,7 @@ import { getStructures, createStructure,
 import { checkMatchFound } from './index';
 import { Entry } from 'models/entry.model';
 import { getEntries } from '../data/entries.data';
+import { checkAuth } from '../data/auth.data';
 
 const router = express.Router();
 
