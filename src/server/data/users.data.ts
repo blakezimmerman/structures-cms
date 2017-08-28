@@ -8,6 +8,12 @@ export const getUser = (userName: string) => {
     .catch((e: any) => Promise.reject(e))
 };
 
+export const getAllUsers = () => {
+  return usersCollection()
+    .then((x: Collection) => x.find().toArray())
+    .catch((e: any) => Promise.reject(e))
+};
+
 export const createUser = (user: UserAccount) => {
   return usersCollection()
     .then((x: Collection) => x.insertOne(user))

@@ -2,8 +2,8 @@ import * as express from 'express';
 import * as bcrypt from 'bcrypt-nodejs';
 import * as uuid from 'uuid/v4';
 import { InsertOneWriteOpResult, UpdateWriteOpResult } from 'mongodb';
-import { NewUser, UserAccount } from 'models/user.model';
-import { getUser, createUser, makeAdmin } from '../data/users.data';
+import { User, NewUser, UserAccount } from 'models/user.model';
+import { getUser, getAllUsers, createUser, makeAdmin } from '../data/users.data';
 import { checkMatchFound } from './index';
 
 const router = express.Router();
@@ -26,6 +26,15 @@ router.post('/new', (req, res) => {
     .then((user: UserAccount) => createUser(user)
       .then((x: InsertOneWriteOpResult) => res.json(x))
       .catch((e: any) => res.status(500).json({e})))
+    .catch((e: any) => res.status(500).json({e}))
+});
+
+router.get('/all', (req, res) => {
+  getAllUsers()
+    .then((x: UserAccount[]) => {
+      const users = x.map(u => ({userName: u.userName, isAdmin: u.isAdmin}));
+      return res.json(users);
+    })
     .catch((e: any) => res.status(500).json({e}))
 });
 
