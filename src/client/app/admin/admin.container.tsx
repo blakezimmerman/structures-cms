@@ -6,6 +6,7 @@ import adminStyles from './admin.styles';
 import { Button } from '../shared/button';
 import UsersPanel from './usersPanel';
 import StructsPanel from './structsPanel';
+import NewStructurePanel from './newStructPanel';
 
 interface Props {
   history: History;
@@ -46,6 +47,9 @@ class AdminPanel extends React.Component<Props, {}> {
           }/>
           <Route exact path='/admin/users' component={UsersPanel}/>
           <Route exact path='/admin/structures' component={StructsPanel}/>
+          <Route exact path='/admin/structures/new' component={NewStructurePanel}/>
+          <Route exact path='/admin/structures/edit/:id' component={UsersPanel}/>
+          <Route exact path='/admin/structures/list/:id' component={UsersPanel}/>
         </div>
       </div>
     );

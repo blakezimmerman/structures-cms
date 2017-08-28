@@ -32,6 +32,17 @@ class StructsPanel extends React.Component<Props, {}> {
 
   doNothing = (event: React.MouseEvent<HTMLElement>) => '';
 
+  toNew = (event: React.MouseEvent<HTMLElement>) =>
+    this.props.history.push('/admin/structures/new')
+
+  toEntries = (id: string) =>
+    (event: React.MouseEvent<HTMLElement>) =>
+      this.props.history.push('/admin/structures/'+ id + '/list')
+
+  toEdit = (id: string) =>
+      (event: React.MouseEvent<HTMLElement>) =>
+        this.props.history.push('/admin/structures/' + id)
+
   startDeleteStructure = (id: string) =>
     (event: React.MouseEvent<HTMLElement>) =>
       this.props.deleteStructure(id);
@@ -41,7 +52,7 @@ class StructsPanel extends React.Component<Props, {}> {
       <Button
         text={'New Structure'}
         color={'#fff'}
-        //callback={callback}
+        callback={this.toNew}
         styles={{
           color: primaryColor,
           minWidth: '60%',
@@ -72,8 +83,8 @@ class StructsPanel extends React.Component<Props, {}> {
         <div style={adminStyles.info}>{struct.name}</div>
         <div style={adminStyles.info}>{struct.description}</div>
         <div style={adminStyles.actionButtons}>
-          {structsButton('Entries', this.doNothing)}
-          {structsButton('Edit', this.doNothing)}
+          {structsButton('Entries', this.toEntries(struct._id))}
+          {structsButton('Edit', this.toEdit(struct._id))}
           {structsButton('Delete', this.startDeleteStructure(struct._id))}
         </div>
       </div>;

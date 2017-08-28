@@ -1,9 +1,10 @@
 export enum FieldType {
-  TextInput,
-  Number,
-  Checkbox,
-  Picture,
-  Url
+  TextInput = 1,
+  Number = 2,
+  Checkbox = 3,
+  TextArea = 4,
+  Picture = 5,
+  Url = 6
 }
 
 export interface Field {
