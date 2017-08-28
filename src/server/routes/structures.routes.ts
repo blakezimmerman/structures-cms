@@ -1,9 +1,13 @@
 import * as express from 'express';
-import { InsertOneWriteOpResult, UpdateWriteOpResult,
-         DeleteWriteOpResultObject } from 'mongodb';
+import {
+  InsertOneWriteOpResult, UpdateWriteOpResult,
+  DeleteWriteOpResultObject
+} from 'mongodb';
 import { Structure } from 'models/structure.model';
-import { getStructures, createStructure,
-         updateStructure, deleteStructure } from '../data/structures.data';
+import {
+  getStructures, createStructure,
+  updateStructure, deleteStructure
+} from '../data/structures.data';
 import { checkMatchFound } from './index';
 import { Entry } from 'models/entry.model';
 import { getEntries } from '../data/entries.data';

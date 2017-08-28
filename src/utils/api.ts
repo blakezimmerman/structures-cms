@@ -17,3 +17,13 @@ export const logoutRequest = () =>
   axios.get(API_URL + 'auth/logout')
     .then(res => res.data)
     .catch(e => Promise.reject(e));
+
+export const registerRequest = (user: NewUser) =>
+  axios.post(API_URL + 'users/new', user)
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));
+
+export const makeAdminRequest = (userName: string) =>
+  axios.get(API_URL + 'users/makeadmin/' + userName)
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));

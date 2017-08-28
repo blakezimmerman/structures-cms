@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import * as Radium from 'radium';
 import { State } from '../app.reducer';
 import { Action } from '../app.actions';
 import * as loginActions from './login.actions';
 import loginStyles from './login.styles';
 import { primaryColor } from 'client/globalStyles';
-import { ClickFunction, Button } from '../shared/button';
+import { Button } from '../shared/button';
 import { User, NewUser } from 'models/user.model';
 
 interface Props {
@@ -76,6 +76,10 @@ class Login extends React.Component<Props, UIState> {
             password: this.state.passwordInput
           })}
         />
+        <div>
+          Not Registered?
+          <Link to={'/register'}>Click here to make an account!</Link>
+        </div>
       </div>
     );
   }
@@ -84,7 +88,7 @@ class Login extends React.Component<Props, UIState> {
 const mapStateToProps = (state: State) => ({...state.login});
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  login: (requestedUser: NewUser) => dispatch(loginActions.login(requestedUser)),
+  login: (requestedUser: NewUser) => dispatch(loginActions.login(requestedUser))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Radium(Login)));

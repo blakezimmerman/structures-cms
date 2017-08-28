@@ -3,6 +3,7 @@ import { Action } from '../app.actions';
 import {
   LOGIN_SUCCESS, LOGIN_FAILURE,
   LOGOUT_SUCCESS, LOGOUT_FAILURE,
+  REGISTER_SUCCESS, REGISTER_FAILURE,
   IS_FETCHING
 } from './login.actions';
 import { User } from 'models/user.model';
@@ -42,6 +43,18 @@ const login = (state = initialState, action: Action) => {
         error: ''
       };
     case LOGOUT_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      };
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: ''
+      };
+    case REGISTER_FAILURE:
       return {
         ...state,
         isFetching: false,

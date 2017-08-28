@@ -29,7 +29,7 @@ router.post('/new', (req, res) => {
     .catch((e: any) => res.status(500).json({e}))
 });
 
-router.get('/:username/makeadmin', (req, res) => {
+router.get('/makeadmin/:username', (req, res) => {
   makeAdmin(req.params.username)
     .then((x: UpdateWriteOpResult) => checkMatchFound(x, res))
     .catch((e: any) => res.status(500).json({e}))

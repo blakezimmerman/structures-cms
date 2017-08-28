@@ -1,10 +1,14 @@
 import * as express from 'express';
-import { InsertOneWriteOpResult, UpdateWriteOpResult,
-         DeleteWriteOpResultObject } from 'mongodb';
+import {
+  InsertOneWriteOpResult, UpdateWriteOpResult,
+  DeleteWriteOpResultObject
+} from 'mongodb';
 import { Entry } from 'models/entry.model';
 import { Comment } from 'models/comment.model';
-import { getEntries, createEntry, updateEntry,
-         deleteEntry, addComment } from '../data/entries.data';
+import {
+  getEntries, createEntry, updateEntry,
+  deleteEntry, addComment
+} from '../data/entries.data';
 import { checkMatchFound } from './index';
 
 const router = express.Router();
