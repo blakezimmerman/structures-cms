@@ -2,7 +2,8 @@ import { Dispatch } from 'react-redux';
 import { Action } from '../app.actions';
 import { NewUser } from 'models/user.model';
 import {
-  loginRequest, logoutRequest, registerRequest
+  loginRequest, logoutRequest, registerRequest,
+  passiveLoginRequest
 } from 'utils/api';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -57,3 +58,13 @@ export const register = (user: NewUser) =>
       })
     );
   };
+
+export const passiveLogin = () =>
+  (dispatch: Dispatch<Action>) =>
+    passiveLoginRequest().then(
+      user => dispatch({
+        type: LOGIN_SUCCESS,
+        payload: user
+      }),
+      error => error
+    );

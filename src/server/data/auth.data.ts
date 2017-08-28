@@ -7,3 +7,11 @@ export const checkAuth =
     jwt.verify(req.signedCookies.token, secret, (e: any, decoded: string) =>
       (e || !decoded) ? res.status(500).json("Not Authorized") : next()
     );
+
+export const checkAdmin =
+  (req: Request, res: Response, next: NextFunction) =>
+    jwt.verify(req.signedCookies.token, secret, (e: any, decoded: string) =>
+      (e || !decoded || !(decoded as any).isAdmin)
+        ? res.status(500).json("Not Authorized")
+        : next()
+    );

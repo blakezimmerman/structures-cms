@@ -29,6 +29,11 @@ export const registerRequest = (user: NewUser) =>
     .then(res => res.data)
     .catch(e => Promise.reject(e));
 
+export const passiveLoginRequest = () =>
+  axios.get(API_URL + 'auth/passivelogin')
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));
+
 export const fetchUsers = () =>
   axios.get(API_URL + 'users/all')
     .then(res => res.data)

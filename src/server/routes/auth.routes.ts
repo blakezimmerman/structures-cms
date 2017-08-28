@@ -18,7 +18,7 @@ const checkPassword = (hash: string, password: string) =>
   bcrypt.compareSync(password, hash);
 
 const generateToken = (resUser: User) =>
-  jwt.sign({ userName: resUser.userName, password: resUser.isAdmin }, secret);
+  jwt.sign({ userName: resUser.userName, isAdmin: resUser.isAdmin }, secret);
 
 router.post('/login', (req, res) => {
   findUser(req.body.userName)
@@ -42,5 +42,11 @@ router.get('/logout', (req, res) => {
   res.cookie('token', '', { httpOnly: true, signed: true, maxAge: 0 });
   res.json('success');
 });
+
+router.get('/passivelogin', (req, res) =>
+  jwt.verify(req.signedCookies.token, secret, (e: any, decoded: string) =>
+    (e || !decoded) ? res.status(500).json("Not Authorized") : res.json(decoded)
+  )
+);
 
 export default router;
