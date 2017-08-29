@@ -65,10 +65,10 @@ class NewEntryPanel extends React.Component<Props, UIState> {
         titleInput: entry.title,
         descriptionInput: entry.description,
         field1Content: entry.fields[0].payload,
-        field2Content: entry.fields[0].payload,
-        field3Content: entry.fields[0].payload,
-        field4Content: entry.fields[0].payload,
-        field5Content: entry.fields[0].payload
+        field2Content: entry.fields[1].payload,
+        field3Content: entry.fields[2].payload,
+        field4Content: entry.fields[3].payload,
+        field5Content: entry.fields[4].payload
       });
     }
   }
@@ -81,7 +81,7 @@ class NewEntryPanel extends React.Component<Props, UIState> {
       case 'descriptionInput':
         this.setState({ descriptionInput: event.currentTarget.value });
         break;
-        case 'field1Content':
+      case 'field1Content':
         this.setState({ field1Content: event.currentTarget.value });
         break;
       case 'field2Content':
@@ -110,6 +110,7 @@ class NewEntryPanel extends React.Component<Props, UIState> {
   ];
 
   submitButton = (event: React.MouseEvent<HTMLElement>) => {
+    const curEntry = this.props.entries.filter(x => x._id === this.props.match.params.id)[0];
     const entry: Entry = {
       _id: this.state.isNew ? uuid() : this.props.match.params.id,
       type: this.props.match.params.struct,
@@ -118,7 +119,7 @@ class NewEntryPanel extends React.Component<Props, UIState> {
       author: this.props.user,
       dateCreated: new Date (),
       fields: this.buildFields(),
-      comments: []
+      comments: this.state.isNew ? [] : curEntry.comments
     };
     return (this.state.isNew
       ? this.props.newEntry(entry)

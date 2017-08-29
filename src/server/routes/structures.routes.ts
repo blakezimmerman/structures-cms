@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
     .catch((e: any) => res.status(500).json({e}))
 });
 
-router.post('/new', (req, res) => {
+router.post('/new', checkAdmin, (req, res) => {
   validateStruct(req.body)
     ? createStructure(req.body)
         .then((x: InsertOneWriteOpResult) => res.json(x))
@@ -36,7 +36,7 @@ router.post('/new', (req, res) => {
     : res.status(500).json('Invalid Structure');
 });
 
-router.put('/update', (req, res) => {
+router.put('/update', checkAdmin, (req, res) => {
   validateStruct(req.body)
     ? updateStructure(req.body)
         .then((x: UpdateWriteOpResult) => checkMatchFound(x, res))
@@ -44,7 +44,7 @@ router.put('/update', (req, res) => {
     : res.status(500).json('Invalid Structure');
 });
 
-router.get('/delete/:id', (req, res) => {
+router.get('/delete/:id', checkAdmin, (req, res) => {
   deleteStructure(req.params.id)
     .then((x: DeleteWriteOpResultObject) => checkMatchFound(x, res))
     .catch((e: any) => res.status(500).json({e}))

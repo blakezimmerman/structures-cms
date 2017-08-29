@@ -41,7 +41,6 @@ class App extends React.Component<Props, {}> {
         </Header>
         <Switch>
           <Route exact path='/' component={AllStructures}/>
-          <Route path='/admin' component={Admin}/>
           <Route exact path='/register' component={Register}/>
           {this.props.user
             ? <Route exact path='/login' component={AllStructures}/>

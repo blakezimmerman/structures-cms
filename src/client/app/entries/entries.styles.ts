@@ -40,6 +40,10 @@ const entriesStyles: CSSProperties = {
     fontWeight: '400'
   },
 
+  field: {
+    margin: '1rem 0'
+  },
+
   commentsContainer: {
     entriesContainer: {
       display: 'flex',

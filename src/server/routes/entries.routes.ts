@@ -10,6 +10,7 @@ import {
   deleteEntry, addComment
 } from '../data/entries.data';
 import { checkMatchFound } from './index';
+import { checkAuth, checkAdmin } from '../data/auth.data';
 
 const router = express.Router();
 
@@ -23,7 +24,7 @@ router.get('/:type', (req, res) => {
     .catch((e: any) => res.status(500).json({e}))
 });
 
-router.post('/new', (req, res) => {
+router.post('/new', checkAdmin, (req, res) => {
   validateEntry(req.body)
     ? createEntry(req.body)
         .then((x: InsertOneWriteOpResult) => res.json(x))
@@ -31,7 +32,7 @@ router.post('/new', (req, res) => {
     : res.status(500).json('Invalid Structure');
 });
 
-router.put('/update', (req, res) => {
+router.put('/update', checkAdmin, (req, res) => {
   validateEntry(req.body)
     ? updateEntry(req.body)
         .then((x: UpdateWriteOpResult) => checkMatchFound(x, res))
@@ -39,13 +40,13 @@ router.put('/update', (req, res) => {
     : res.status(500).json('Invalid Structure');
 });
 
-router.get('/delete/:id', (req, res) => {
+router.get('/delete/:id', checkAdmin, (req, res) => {
   deleteEntry(req.params.id)
     .then((x: DeleteWriteOpResultObject) => checkMatchFound(x, res))
     .catch((e: any) => res.status(500).json({e}))
 });
 
-router.put('/comment/:id', (req, res) => {
+router.put('/comment/:id', checkAuth, (req, res) => {
   addComment(req.params.id, req.body)
     .then((x: UpdateWriteOpResult) => checkMatchFound(x, res))
     .catch((e: any) => res.status(500).json({e}))
