@@ -52,7 +52,7 @@ class App extends React.Component<Props, {}> {
             : <Route path='/admin' component={ErrorPage}/>
           }
           <Route exact path='/:struct' component={AllEntries}/>
-          <Route exact path='/:struct/:slug' component={EntryPage}/>
+          <Route exact path='/:struct/:id' component={EntryPage}/>
         </Switch>
       </div>
     );

@@ -102,11 +102,11 @@ class NewEntryPanel extends React.Component<Props, UIState> {
   }
 
   buildFields = (): EntryField[] => [
-    { label: this.state.struct.fields[0].label, payload: this.state.field1Content },
-    { label: this.state.struct.fields[1].label, payload: this.state.field2Content },
-    { label: this.state.struct.fields[2].label, payload: this.state.field3Content },
-    { label: this.state.struct.fields[3].label, payload: this.state.field4Content },
-    { label: this.state.struct.fields[4].label, payload: this.state.field5Content },
+    { type: this.state.struct.fields[0].type, label: this.state.struct.fields[0].label, payload: this.state.field1Content },
+    { type: this.state.struct.fields[1].type, label: this.state.struct.fields[1].label, payload: this.state.field2Content },
+    { type: this.state.struct.fields[2].type, label: this.state.struct.fields[2].label, payload: this.state.field3Content },
+    { type: this.state.struct.fields[3].type, label: this.state.struct.fields[3].label, payload: this.state.field4Content },
+    { type: this.state.struct.fields[4].type, label: this.state.struct.fields[4].label, payload: this.state.field5Content },
   ];
 
   submitButton = (event: React.MouseEvent<HTMLElement>) => {

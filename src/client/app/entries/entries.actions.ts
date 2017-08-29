@@ -28,10 +28,10 @@ export const postComment = (id: string, struct: string, comment: Comment) =>
   (dispatch: Dispatch<Action>) => {
     postCommentRequest(id, comment).then(
       success => {
-        getEntries(struct);
         dispatch({
           type: POST_COMMENT_SUCCESS
         });
+        getEntries(struct)(dispatch);
       },
       error => dispatch({
         type: POST_COMMENT_FAILURE

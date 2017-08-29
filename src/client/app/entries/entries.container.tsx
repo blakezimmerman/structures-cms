@@ -27,9 +27,9 @@ class AllStructures extends React.Component<Props, {}> {
     this.props.getEntries(this.props.match.params.struct);
   }
 
-  toEntry = (history: History, slug: string) =>
+  toEntry = (history: History, id: string) =>
     (event: React.MouseEvent<HTMLElement>) =>
-      history.push('/' + this.props.match.params.struct + '/' + slug);
+      history.push('/' + this.props.match.params.struct + '/' + id);
 
   render() {
     const entry = (entry: Entry) =>

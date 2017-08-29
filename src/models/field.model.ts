@@ -12,34 +12,8 @@ export interface Field {
   type: FieldType
 }
 
-export type EntryField =
-  | EntryTextInput
-  | EntryNumber
-  | EntryCheckbox
-  | EntryPicture
-  | EntryUrl
-
-export interface EntryTextInput {
-  label: string;
-  payload: string;
-}
-
-export interface EntryNumber {
-  label: string;
-  payload: string;
-}
-
-export interface EntryCheckbox {
-  label: string;
-  payload: string;
-}
-
-export interface EntryPicture {
-  label: string;
-  payload: string;
-}
-
-export interface EntryUrl {
+export interface EntryField {
+  type: FieldType;
   label: string;
   payload: string;
 }

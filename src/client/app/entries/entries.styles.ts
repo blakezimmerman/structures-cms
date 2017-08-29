@@ -21,6 +21,43 @@ const entriesStyles: CSSProperties = {
 
   info: {
     margin: '0 1rem'
+  },
+
+  h2: {
+    fontSize: '1.3rem',
+    fontWeight: '300',
+    textAlign: 'center'
+  },
+
+  h3: {
+    fontSize: '1.1rem',
+    fontWeight: '300',
+    textAlign: 'center'
+  },
+
+  strong: {
+    color: primaryColor,
+    fontWeight: '400'
+  },
+
+  commentsContainer: {
+    entriesContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    },
+  },
+
+  comment: {
+    display: 'flex',
+    margin: '0.5rem 1rem',
+    padding: '0.6rem',
+    border: '1px solid ' + primaryColor,
+    borderRadius: '5px',
+  },
+
+  commentText: {
+    margin: '0 0.3rem'
   }
 };
 
