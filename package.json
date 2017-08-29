@@ -9,7 +9,8 @@
     "start:clean": "nodemon --watch 'src/server/**/*.ts' --exec CLEAN=true 'ts-node' src/server/app.ts",
     "start:prod:clean": "nodemon --watch 'src/server/**/*.ts' --exec NODE_ENV=prod CLEAN=true 'ts-node' src/server/app.ts",
     "build": "rimraf dist && webpack --config webpack/webpack.prod.js --bail",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "seed": "'ts-node' src/server/seed.ts"
   },
   "author": "Blake Zimmerman",
   "license": "ISC",

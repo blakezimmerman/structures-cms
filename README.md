@@ -10,8 +10,12 @@ This is a full stack web application written entirely in Typescript. The server 
 - Clone this project to a local directory of your choosing
 - `cd structures-cms` or wherever the project is saved
 - `npm install` to install all package dependencies
+- `npm run seed` to populate the database with some data
 - For a dev environment
   - `npm start` to start the server and create a dev build with webpack middleware
 - For a prod environment
   - `npm run build` to make a production build that is outputted to the `dist` folder
   - `npm run start:prod` to start the server and point it to the dist folder
+- For a clean database
+  - `npm run start:clean` to run a clean dev build
+  - `npm run start:prod:clean` to run a clean prod build
