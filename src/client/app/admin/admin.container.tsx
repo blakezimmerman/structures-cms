@@ -53,7 +53,7 @@ class AdminPanel extends React.Component<Props, {}> {
           <Route exact path='/admin/structures/edit/:id' component={NewStructurePanel}/>
           <Route exact path='/admin/structures/list/:struct' component={EntriesPanel}/>
           <Route exact path='/admin/structures/new/:struct' component={NewEntryPanel}/>
-          <Route exact path='/admin/structures/edit/:id/:struct' component={NewEntryPanel}/>
+          <Route exact path='/admin/structures/edit/:struct/:id' component={NewEntryPanel}/>
         </div>
       </div>
     );

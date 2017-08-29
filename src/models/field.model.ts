@@ -21,26 +21,25 @@ export type EntryField =
 
 export interface EntryTextInput {
   label: string;
-  text: string;
+  payload: string;
 }
 
 export interface EntryNumber {
   label: string;
-  number: number;
+  payload: string;
 }
 
 export interface EntryCheckbox {
   label: string;
-  checked: boolean;
+  payload: string;
 }
 
 export interface EntryPicture {
   label: string;
-  title: string;
-  path: string;
+  payload: string;
 }
 
 export interface EntryUrl {
   label: string;
-  url: string;
+  payload: string;
 }

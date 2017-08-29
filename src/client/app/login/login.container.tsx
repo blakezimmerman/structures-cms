@@ -59,7 +59,7 @@ class Login extends React.Component<Props, UIState> {
         <label>
           Password
           <input
-            type='text'
+            type='password'
             value={this.state.passwordInput}
             onChange={this.updatePassword} />
         </label>
