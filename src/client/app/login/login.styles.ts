@@ -6,6 +6,19 @@ const loginStyles: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
+  },
+
+  header: {
+    fontSize: '1.3rem',
+    fontWeight: '300'
+  },
+
+  loginInput: {
+    margin: '0.2rem'
+  },
+
+  registerLink: {
+    margin: '0.2rem'
   }
 };
 

@@ -48,16 +48,16 @@ class Register extends React.Component<Props, UIState> {
   render() {
     return (
       <div style={loginStyles.loginContainer}>
-        Register
-        <label>
-          User Name
+        <h2 style={loginStyles.header}>Register</h2>
+        <label style={loginStyles.loginInput}>
+          {'User Name '}
           <input
             type='text'
             value={this.state.userNameInput}
             onChange={this.updateUserName} />
         </label>
-        <label>
-          Password
+        <label style={loginStyles.loginInput}>
+          {'Password '}
           <input
             type='password'
             value={this.state.passwordInput}
@@ -68,6 +68,7 @@ class Register extends React.Component<Props, UIState> {
           color={'#fff'}
           styles={{
             color: primaryColor,
+            margin: '0.8rem',
             border: '1px solid' + primaryColor,
             ':hover': { backgroundColor: '#f1effd' }
           }}

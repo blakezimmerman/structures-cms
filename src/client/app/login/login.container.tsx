@@ -48,16 +48,16 @@ class Login extends React.Component<Props, UIState> {
   render() {
     return (
       <div style={loginStyles.loginContainer}>
-        Sign in
-        <label>
-          User Name
+        <h2 style={loginStyles.header}>Sign in</h2>
+        <label style={loginStyles.loginInput}>
+          {'User Name '}
           <input
             type='text'
             value={this.state.userNameInput}
             onChange={this.updateUserName} />
         </label>
-        <label>
-          Password
+        <label style={loginStyles.loginInput}>
+          {'Password '}
           <input
             type='password'
             value={this.state.passwordInput}
@@ -68,6 +68,7 @@ class Login extends React.Component<Props, UIState> {
           color={'#fff'}
           styles={{
             color: primaryColor,
+            margin: '0.8rem',
             border: '1px solid' + primaryColor,
             ':hover': { backgroundColor: '#f1effd' }
           }}
@@ -76,8 +77,8 @@ class Login extends React.Component<Props, UIState> {
             password: this.state.passwordInput
           })}
         />
-        <div>
-          Not Registered?
+        <div style={loginStyles.registerLink}>
+          {'Not Registered? '}
           <Link to={'/register'}>Click here to make an account!</Link>
         </div>
       </div>
