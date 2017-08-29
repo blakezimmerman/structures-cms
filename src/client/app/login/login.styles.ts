@@ -19,6 +19,11 @@ const loginStyles: CSSProperties = {
 
   registerLink: {
     margin: '0.2rem'
+  },
+
+  errorText: {
+    margin: '0.2rem',
+    color: 'red'
   }
 };
 

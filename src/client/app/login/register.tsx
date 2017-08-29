@@ -77,6 +77,9 @@ class Register extends React.Component<Props, UIState> {
             password: this.state.passwordInput
           })}
         />
+        <div style={loginStyles.errorText}>
+          {this.props.error ? (this.props.error as any).response.data.e : ''}
+        </div>
       </div>
     );
   }

@@ -81,6 +81,9 @@ class Login extends React.Component<Props, UIState> {
           {'Not Registered? '}
           <Link to={'/register'}>Click here to make an account!</Link>
         </div>
+        <div style={loginStyles.errorText}>
+          {this.props.error ? (this.props.error as any).response.data : ''}
+        </div>
       </div>
     );
   }
