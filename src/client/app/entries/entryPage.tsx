@@ -19,7 +19,7 @@ interface Props {
 
 const EntryPage = (props: Props) => {
   const entry: Entry = props.entries.filter(x => x._id === props.match.params.slug)[0];
-
+  console.log(entry)
   return (
     <div>Entry Page for {props.match.params.slug}</div>
   );

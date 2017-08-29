@@ -138,7 +138,7 @@ class NewStructurePanel extends React.Component<Props, UIState> {
 
   submitButton = (event: React.MouseEvent<HTMLElement>) => {
     const struct: Structure = {
-      _id: uuid(),
+      _id: this.state.isNew ? uuid() : this.props.match.params.id,
       name: this.state.nameInput,
       description: this.state.descriptionInput,
       fields: this.buildFields()

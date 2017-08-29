@@ -111,7 +111,7 @@ class NewEntryPanel extends React.Component<Props, UIState> {
 
   submitButton = (event: React.MouseEvent<HTMLElement>) => {
     const entry: Entry = {
-      _id: uuid(),
+      _id: this.state.isNew ? uuid() : this.props.match.params.id,
       type: this.props.match.params.struct,
       title: this.state.titleInput,
       description: this.state.descriptionInput,

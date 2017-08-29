@@ -2,6 +2,7 @@ import axios from 'axios';
 import { NewUser } from 'models/user.model';
 import { Structure } from 'models/structure.model';
 import { Entry } from 'models/entry.model';
+import { Comment } from 'models/comment.model';
 
 const API_URL = 'http://localhost:3000/api/';
 
@@ -12,6 +13,11 @@ export const fetchStructures = () =>
 
 export const fetchEntries = (struct: string) =>
   axios.get(API_URL + 'entries/' + struct)
+    .then(res => res.data)
+    .catch(e => Promise.reject(e));
+
+export const postCommentRequest = (id: string, comment: Comment) =>
+  axios.put(API_URL + 'entries/comment/' + id, comment)
     .then(res => res.data)
     .catch(e => Promise.reject(e));
 
