@@ -128,7 +128,7 @@ class NewEntryPanel extends React.Component<Props, UIState> {
 
   render() {
     const textInput = (label: string, value: string, handler: string) =>
-      <div>
+      <div style={adminStyles.adminInput}>
         <label>
           {label + ': '}
           <input
@@ -142,7 +142,9 @@ class NewEntryPanel extends React.Component<Props, UIState> {
       <div style={adminStyles.adminContainer}>
         {this.state.struct ?
         <div>
-          {this.state.isNew ? 'Create a new entry' : 'Edit this entry'}
+          <h2 style={adminStyles.h2}>
+            {this.state.isNew ? 'Create a new entry' : 'Edit this entry'}
+          </h2>
           {textInput('Title', this.state.titleInput, 'titleInput')}
           {textInput('Description', this.state.descriptionInput, 'descriptionInput')}
           {textInput(this.state.struct.fields[0].label, this.state.field1Content, 'field1Content')}
@@ -150,15 +152,15 @@ class NewEntryPanel extends React.Component<Props, UIState> {
           {textInput(this.state.struct.fields[2].label, this.state.field3Content, 'field3Content')}
           {textInput(this.state.struct.fields[3].label, this.state.field4Content, 'field4Content')}
           {textInput(this.state.struct.fields[4].label, this.state.field5Content, 'field5Content')}
-
           <Button
             text={this.state.isNew ? 'Create Entry': 'Update Entry'}
             color={'#fff'}
             callback={this.submitButton}
             styles={{
               color: primaryColor,
-              minWidth: '60%',
+              minWidth: '100%',
               maxwidth: '800px',
+              margin: '0.8rem',
               border: '1px solid' + primaryColor,
               ':hover': { backgroundColor: '#f1effd' }
             }}

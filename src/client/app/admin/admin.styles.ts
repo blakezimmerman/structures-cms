@@ -21,6 +21,11 @@ const adminStyles: CSSProperties = {
     width: '100%'
   },
 
+  h2: {
+    fontSize: '1.3rem',
+    fontWeight: '300'
+  },
+
   adminBodyContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -51,6 +56,10 @@ const adminStyles: CSSProperties = {
     justifyContent: 'center',
     alignItems: 'center',
     margin: '0 1rem'
+  },
+
+  adminInput: {
+    margin: '0.2rem'
   }
 };
 

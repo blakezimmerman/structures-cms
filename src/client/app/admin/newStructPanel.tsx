@@ -151,7 +151,7 @@ class NewStructurePanel extends React.Component<Props, UIState> {
 
   render() {
     const textInput = (label: string, value: string, handler: string) =>
-      <div>
+      <div style={adminStyles.adminInput}>
         <label>
           {label + ': '}
           <input
@@ -162,8 +162,8 @@ class NewStructurePanel extends React.Component<Props, UIState> {
       </div>;
 
     const fieldForm = (num: number, labelValue: string, typeValue: number) =>
-      <div>
-        {'Field ' + num}
+      <div style={adminStyles.adminInput}>
+        {'Field ' + num + ': '}
         <label>
           {' Label: '}
           <input
@@ -186,7 +186,9 @@ class NewStructurePanel extends React.Component<Props, UIState> {
 
     return (
       <div style={adminStyles.adminContainer}>
-        {this.state.isNew ? 'Create a new structure' : 'Edit this structure'}
+        <h2 style={adminStyles.h2}>
+          {this.state.isNew ? 'Create a new structure' : 'Edit this structure'}
+        </h2>
         {textInput('Name', this.state.nameInput, 'nameInput')}
         {textInput('Description', this.state.descriptionInput, 'descriptionInput')}
         {fieldForm(1, this.state.field1Label, this.state.field1Type)}
@@ -200,6 +202,7 @@ class NewStructurePanel extends React.Component<Props, UIState> {
           callback={this.submitButton}
           styles={{
             color: primaryColor,
+            margin: '0.8rem',
             minWidth: '60%',
             maxwidth: '800px',
             border: '1px solid' + primaryColor,
